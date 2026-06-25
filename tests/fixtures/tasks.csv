@@ -1,0 +1,5 @@
+title,completed,due,priority
+Write tests,true,2026-06-20,high
+Wire GitHub Actions,false,2026-06-24,high
+Publish package,false,2026-06-30,medium
+Triage ideas,false,,low

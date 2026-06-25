@@ -1,0 +1,6 @@
+[
+  {"title": "Write tests", "completed": true, "due": "2026-06-20", "priority": "high"},
+  {"title": "Wire GitHub Actions", "completed": false, "due": "2026-06-24", "priority": "high"},
+  {"title": "Publish package", "completed": false, "due": "2026-06-30", "priority": "medium"},
+  {"title": "Triage ideas", "completed": false, "priority": "low"}
+]
