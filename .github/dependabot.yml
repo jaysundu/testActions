@@ -1,8 +1,18 @@
 # Generated for the Dependabot digest-refresh test.
 version: 2
 
+registries:
+  ghcr:
+    type: docker-registry
+    url: https://ghcr.io
+    username: jaysundu
+    password: ${{secrets.GHCR_TOKEN}}
+    replaces-base: true
+
 updates:
   - package-ecosystem: docker
     directory: /digest-refresh-test/consumer
+    registries:
+      - ghcr
     schedule:
       interval: daily
