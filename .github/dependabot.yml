@@ -1,0 +1,8 @@
+# Generated for the Dependabot digest-refresh test.
+version: 2
+
+updates:
+  - package-ecosystem: docker
+    directory: /digest-refresh-test/consumer
+    schedule:
+      interval: daily
