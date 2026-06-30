@@ -26,5 +26,11 @@ updates:
     directory: /digest-refresh-test/dhi-consumer
     registries:
       - dhi
+    ignore:
+      - dependency-name: nginx
+        update-types:
+          - version-update:semver-major
+          - version-update:semver-minor
+          - version-update:semver-patch
     schedule:
       interval: daily
