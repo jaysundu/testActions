@@ -1,2 +1,2 @@
 # This Dockerfile is only for testing Dependabot same-tag digest refreshes.
-FROM ghcr.io/jaysundu/testactions-dependabot-digest-fixture:1.0.1@sha256:ae9d7c5b1365614fb63316b23d36a5268de383ad32f6717c2bc1bfe1b12dc892
+FROM ghcr.io/jaysundu/testactions-dependabot-digest-fixture:1.0.1@sha256:4c26270fcafba512f7ede884eec0261bdc240affbf528cb7877fe670107e4446
