@@ -46,6 +46,8 @@ bash scripts/build-digest-fixture.sh fixture-b
 Insights -> Dependency graph -> Dependabot -> Recent update jobs -> Check for updates
 ```
 
+The test uses `.github/dependabot.yml` with explicit GHCR registry credentials. Configure `GHCR_TOKEN` as a Dependabot secret, not an Actions secret. A GitHub classic PAT with `read:packages` is sufficient.
+
 ## Pass Condition
 
 Dependabot opens a PR that changes only the digest:
@@ -59,6 +61,23 @@ Dependabot opens a PR that changes only the digest:
 
 Dependabot reports the dependency is up to date, opens no PR, or only handles visible tag updates.
 
+## Observed Result
+
+The same-tag digest-only update test passed. Dependabot opened PRs for the unchanged fixture tag after the registry digest was changed by repushing new fixture content.
+
+## Repeat The Test
+
+To repeat the test after merging the current Dependabot PR, push new content to the same tag:
+
+```bash
+IMAGE=ghcr.io/jaysundu/testactions-dependabot-digest-fixture:1.0.1 \
+  bash scripts/build-digest-fixture.sh fixture-f
+```
+
+Then run Dependabot `Check for updates` again.
+
+Do not run `scripts/write-digest-consumer.sh` during the repeat step. Dependabot should be the process that changes `digest-refresh-test/consumer/Dockerfile`.
+
 ## GHCR Access
 
-If the GHCR fixture package is private, Dependabot needs access to it. The simplest first test is to make the disposable fixture package public so registry authentication does not obscure the digest-refresh result.
+Dependabot needs access to GHCR package metadata. The generated `.github/dependabot.yml` uses a `GHCR_TOKEN` Dependabot secret and a `docker-registry` entry for `https://ghcr.io`.

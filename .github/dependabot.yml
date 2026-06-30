@@ -8,11 +8,23 @@ registries:
     username: jaysundu
     password: ${{secrets.GHCR_TOKEN}}
     replaces-base: true
+  dhi:
+    type: docker-registry
+    url: https://dhi.io
+    username: ${{secrets.DHI_USERNAME}}
+    password: ${{secrets.DHI_TOKEN}}
+    replaces-base: true
 
 updates:
   - package-ecosystem: docker
     directory: /digest-refresh-test/consumer
     registries:
       - ghcr
+    schedule:
+      interval: daily
+  - package-ecosystem: docker
+    directory: /digest-refresh-test/dhi-consumer
+    registries:
+      - dhi
     schedule:
       interval: daily
