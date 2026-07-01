@@ -31,11 +31,11 @@ module.exports = {
 
   packageRules: [
     {
-      description: "DHI nginx digest-only test: disable visible tag bumps",
+      description: "DHI nginx patch test: disable major and minor tag bumps",
       matchManagers: ["dockerfile"],
       matchDatasources: ["docker"],
       matchPackageNames: ["dhi.io/nginx", "nginx"],
-      matchUpdateTypes: ["major", "minor", "patch"],
+      matchUpdateTypes: ["major", "minor"],
       enabled: false,
     },
     {
