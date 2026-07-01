@@ -8,6 +8,8 @@ on:
         required: true
         type: boolean
         default: false
+  schedule:
+    - cron: "17 9 * * *"
 
 permissions:
   contents: read
@@ -36,7 +38,7 @@ jobs:
           test -n "$DHI_TOKEN" || { echo "::error::DHI_TOKEN secret is required"; exit 1; }
 
       - name: Run Renovate dry run
-        if: ${{ inputs.dry_run }}
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
         uses: renovatebot/github-action@v46.1.17
         env:
           RENOVATE_REPOSITORY: ${{ github.repository }}
@@ -49,7 +51,7 @@ jobs:
           token: ${{ secrets.RENOVATE_TOKEN }}
 
       - name: Run Renovate
-        if: ${{ !inputs.dry_run }}
+        if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && !inputs.dry_run) }}
         uses: renovatebot/github-action@v46.1.17
         env:
           RENOVATE_REPOSITORY: ${{ github.repository }}
