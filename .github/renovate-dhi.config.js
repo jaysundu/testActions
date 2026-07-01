@@ -13,6 +13,7 @@ module.exports = {
   branchPrefix: "renovate-dhi/",
   dependencyDashboard: true,
   enabledManagers: ["dockerfile"],
+  separateMinorPatch: true,
   labels: ["dependencies", "renovate", "dhi"],
 
   ignorePaths: [
