@@ -1,0 +1,61 @@
+name: Renovate DHI Digest Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Only log planned updates without creating branches or PRs
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: renovate-dhi
+  cancel-in-progress: false
+
+jobs:
+  renovate:
+    name: Renovate DHI
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Check required secrets
+        env:
+          RENOVATE_TOKEN: ${{ secrets.RENOVATE_TOKEN }}
+          DHI_USERNAME: ${{ secrets.DHI_USERNAME }}
+          DHI_TOKEN: ${{ secrets.DHI_TOKEN }}
+        run: |
+          test -n "$RENOVATE_TOKEN" || { echo "::error::RENOVATE_TOKEN secret is required"; exit 1; }
+          test -n "$DHI_USERNAME" || { echo "::error::DHI_USERNAME secret is required"; exit 1; }
+          test -n "$DHI_TOKEN" || { echo "::error::DHI_TOKEN secret is required"; exit 1; }
+
+      - name: Run Renovate dry run
+        if: ${{ inputs.dry_run }}
+        uses: renovatebot/github-action@v46.1.17
+        env:
+          RENOVATE_REPOSITORY: ${{ github.repository }}
+          DHI_USERNAME: ${{ secrets.DHI_USERNAME }}
+          DHI_TOKEN: ${{ secrets.DHI_TOKEN }}
+          LOG_LEVEL: debug
+          RENOVATE_DRY_RUN: full
+        with:
+          configurationFile: .github/renovate-dhi.config.js
+          token: ${{ secrets.RENOVATE_TOKEN }}
+
+      - name: Run Renovate
+        if: ${{ !inputs.dry_run }}
+        uses: renovatebot/github-action@v46.1.17
+        env:
+          RENOVATE_REPOSITORY: ${{ github.repository }}
+          DHI_USERNAME: ${{ secrets.DHI_USERNAME }}
+          DHI_TOKEN: ${{ secrets.DHI_TOKEN }}
+          LOG_LEVEL: debug
+        with:
+          configurationFile: .github/renovate-dhi.config.js
+          token: ${{ secrets.RENOVATE_TOKEN }}

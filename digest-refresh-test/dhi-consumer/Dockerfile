@@ -1,2 +1,2 @@
-# This Dockerfile is only for testing Dependabot DHI digest refreshes.
-FROM dhi.io/nginx:1.30.3@sha256:ab77ec67ec834db6e67706b3b132c57527edd82b8862056db62fd2cd9c65faeb
+# This Dockerfile is only for testing DHI same-tag digest refreshes.
+FROM dhi.io/nginx:1.30.1@sha256:595bf8694e4a023f8f2843247919aa1f7cf61b1afcf51cf8e62b7237fb5382c0
