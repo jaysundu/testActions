@@ -1,4 +1,4 @@
-name: Renovate DHI Digest Test
+name: Renovate DHI Updates
 
 on:
   workflow_dispatch:
@@ -20,7 +20,7 @@ concurrency:
 
 jobs:
   renovate:
-    name: Renovate DHI
+    name: Renovate DHI Updates
     runs-on: ubuntu-latest
 
     steps:
