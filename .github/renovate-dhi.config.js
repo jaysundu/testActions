@@ -24,8 +24,8 @@ module.exports = {
     {
       hostType: "docker",
       matchHost: "dhi.io",
-      username: process.env.DHI_USERNAME,
-      password: process.env.DHI_TOKEN,
+      username: process.env.RENOVATE_DHI_USERNAME,
+      password: process.env.RENOVATE_DHI_TOKEN,
     },
   ],
 
